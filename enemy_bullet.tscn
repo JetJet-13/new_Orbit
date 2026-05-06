@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b68n11o0xu781"]
+
+[ext_resource type="Script" path="res://Enemy_Bullet.gd" id="1_x51ul"]
+[ext_resource type="Texture2D" uid="uid://l4nuyx6ris82" path="res://Assets/Bullets/DarkBall.png" id="2_iswyn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j6u6d"]
+height = 46.0
+
+[node name="EnemyBullet" type="Area2D" groups=["bullet", "enemy_bullets"]]
+script = ExtResource("1_x51ul")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.41631, 1.63786)
+rotation = 0.00667546
+scale = Vector2(0.0766298, 0.159827)
+texture = ExtResource("2_iswyn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_j6u6d")

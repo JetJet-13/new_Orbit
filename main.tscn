@@ -1,0 +1,128 @@
+[gd_scene load_steps=16 format=3 uid="uid://c40pyo6x76qx8"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5l6if"]
+[ext_resource type="Script" path="res://enemy_center.gd" id="1_btu2p"]
+[ext_resource type="Script" path="res://health_component.gd" id="1_kbvf7"]
+[ext_resource type="Texture2D" uid="uid://c87u5rwk4fma3" path="res://Assets/spaceships/First_Ship.png" id="1_yclm8"]
+[ext_resource type="Script" path="res://orbit_component.gd" id="2_3eql5"]
+[ext_resource type="Texture2D" uid="uid://bb65fayd5bvpc" path="res://Assets/Enemy/DarkWaveShip.png" id="2_414ka"]
+[ext_resource type="Script" path="res://input_component.gd" id="3_7hpys"]
+[ext_resource type="Script" path="res://shoot_component.gd" id="4_ees30"]
+[ext_resource type="Script" path="res://attack_component.gd" id="4_mrdpf"]
+[ext_resource type="Script" path="res://hit_box.gd" id="10_8tca8"]
+[ext_resource type="Texture2D" uid="uid://idgct8tfrde5" path="res://Assets/Bullets/Bullet2.png" id="11_2h6ju"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yihcj"]
+radius = 18.2483
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2duk7"]
+radius = 17.0
+height = 36.0
+
+[sub_resource type="GDScript" id="GDScript_v2t8w"]
+script/source = "extends Node
+
+@onready var owner_node = get_parent()
+@onready var bullet_scene = preload(\"res://bullet.tscn\")
+@export var center_node: Node2D
+
+func shoot():
+	if center_node == null:
+		return
+
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = owner_node.global_position
+
+	# shoot toward center
+	var dir = (center_node.global_position - owner.global_position).normalized()
+	bullet.direction = dir
+
+	get_tree().current_scene.add_child(bullet)
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ojofu"]
+radius = 17.0
+height = 36.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_5l6if")
+
+[node name="EnemyCenter" type="Node2D" parent="." groups=["enemy_bullet"]]
+position = Vector2(645, 351)
+script = ExtResource("1_btu2p")
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyCenter"]
+position = Vector2(-1.26362e-05, -10)
+scale = Vector2(0.203125, 0.203125)
+texture = ExtResource("2_414ka")
+
+[node name="HealthComponent" type="Node" parent="EnemyCenter"]
+script = ExtResource("1_kbvf7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCenter"]
+shape = SubResource("CircleShape2D_yihcj")
+
+[node name="AttackComponent" type="Node" parent="EnemyCenter" node_paths=PackedStringArray("player")]
+script = ExtResource("4_mrdpf")
+fire_rate = 0.3
+player = NodePath("../../Player")
+
+[node name="HitBox" type="Area2D" parent="EnemyCenter"]
+position = Vector2(-10, -3)
+script = ExtResource("10_8tca8")
+takes_damage_from = "player_bullet"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCenter/HitBox"]
+position = Vector2(10, 3)
+shape = SubResource("CapsuleShape2D_2duk7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AmmoLabel" type="Label" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 652.0
+offset_right = 120.0
+offset_bottom = 706.0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BulletSprite" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(40, 668)
+scale = Vector2(0.572701, 0.449153)
+texture = ExtResource("11_2h6ju")
+region_enabled = true
+region_rect = Rect2(1.5, 0, 70, 118)
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("center_node")]
+position = Vector2(1172, 368)
+script = SubResource("GDScript_v2t8w")
+center_node = NodePath("../EnemyCenter")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(0, 3.0458e-05)
+rotation = -1.56616
+scale = Vector2(0.270245, 0.261339)
+texture = ExtResource("1_yclm8")
+
+[node name="OrbitComponent" type="Node" parent="Player" node_paths=PackedStringArray("center_node")]
+script = ExtResource("2_3eql5")
+center_node = NodePath("../../EnemyCenter")
+
+[node name="InputComponent" type="Node" parent="Player"]
+script = ExtResource("3_7hpys")
+
+[node name="ShootComponent" type="Node" parent="Player" node_paths=PackedStringArray("center_node")]
+script = ExtResource("4_ees30")
+center_node = NodePath("../../EnemyCenter")
+
+[node name="HealthComponent" type="Node" parent="Player"]
+script = ExtResource("1_kbvf7")
+max_health = 3
+
+[node name="HitBox" type="Area2D" parent="Player"]
+script = ExtResource("10_8tca8")
+takes_damage_from = "enemy_bullets"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HitBox"]
+position = Vector2(12, 2)
+shape = SubResource("CapsuleShape2D_ojofu")
