@@ -8,6 +8,8 @@ var time_alive := 0.0
 var is_enemy_bullet = true
 var can_be_destroyed_by_bullets = true
 
+@onready var sprite = get_node_or_null("Sprite2D")
+
 func _ready():
 	connect("area_entered", Callable(self, "_on_area_entered"))
 
@@ -34,3 +36,7 @@ func _on_area_entered(area):
 	# cancel bullets
 	queue_free()
 	area.queue_free()
+	
+func set_bullet_texture(new_texture):
+	if sprite:
+		sprite.texture = new_texture

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c40pyo6x76qx8"]
+[gd_scene load_steps=17 format=3 uid="uid://c40pyo6x76qx8"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5l6if"]
 [ext_resource type="Script" path="res://enemy_center.gd" id="1_btu2p"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://input_component.gd" id="3_7hpys"]
 [ext_resource type="Script" path="res://shoot_component.gd" id="4_ees30"]
 [ext_resource type="Script" path="res://attack_component.gd" id="4_mrdpf"]
+[ext_resource type="Script" path="res://visual_component.gd" id="7_4uie1"]
 [ext_resource type="Script" path="res://hit_box.gd" id="10_8tca8"]
 [ext_resource type="Texture2D" uid="uid://idgct8tfrde5" path="res://Assets/Bullets/Bullet2.png" id="11_2h6ju"]
 
@@ -50,6 +51,7 @@ script = ExtResource("1_5l6if")
 [node name="EnemyCenter" type="Node2D" parent="." groups=["enemy_bullet"]]
 position = Vector2(645, 351)
 script = ExtResource("1_btu2p")
+fire_rate = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemyCenter"]
 position = Vector2(-1.26362e-05, -10)
@@ -64,7 +66,7 @@ shape = SubResource("CircleShape2D_yihcj")
 
 [node name="AttackComponent" type="Node" parent="EnemyCenter" node_paths=PackedStringArray("player")]
 script = ExtResource("4_mrdpf")
-fire_rate = 0.3
+fire_rate = 0.5
 player = NodePath("../../Player")
 
 [node name="HitBox" type="Area2D" parent="EnemyCenter"]
@@ -75,6 +77,9 @@ takes_damage_from = "player_bullet"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCenter/HitBox"]
 position = Vector2(10, 3)
 shape = SubResource("CapsuleShape2D_2duk7")
+
+[node name="VisualComponent" type="Node" parent="EnemyCenter"]
+script = ExtResource("7_4uie1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -29,7 +29,7 @@ func _on_player_died():
 func _on_enemy_died():
 	if game_over: return
 	level += 1
-	start_next_level()
+	
 	#print("YOU WIN")
 	
 func _on_ammo_changed(current, max_ammo):
@@ -39,26 +39,3 @@ func _on_ammo_changed(current, max_ammo):
 	else:
 		ammo_label.text = " %d / %d" % [current, max_ammo]
 		bullet_icon.visible = true
-
-func start_next_level():
-	var enemy = $EnemyCenter   # your correct node
-
-	# 🔥 reset health
-	var health = enemy.get_node("HealthComponent")
-	health.current_health = health.max_health
-	health.emit_signal("health_changed", health.current_health, health.max_health)
-
-	# 🔥 reset position
-	enemy.global_position = Vector2(500, 300)
-
-	# 🔥 change behavior
-	match level:
-		1:
-			enemy.enemy_type = "basic"
-		2:
-			enemy.enemy_type = "fast"
-
-	# 🔥 APPLY NEW TYPE (IMPORTANT)
-	enemy.apply_enemy_type()
-
-	print("Enemy reset for level:", level)
