@@ -41,7 +41,7 @@ func shoot():
 	if use_predictive_targeting:
 		var orbit = player.get_node("OrbitComponent")
 
-		var prediction_time = 0.7
+		var prediction_time = 2.0
 
 		target_position += orbit.velocity * prediction_time
 

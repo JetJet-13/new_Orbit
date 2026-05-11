@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c40pyo6x76qx8"]
+[gd_scene load_steps=18 format=3 uid="uid://c40pyo6x76qx8"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5l6if"]
 [ext_resource type="Script" path="res://enemy_center.gd" id="1_btu2p"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://shoot_component.gd" id="4_ees30"]
 [ext_resource type="Script" path="res://attack_component.gd" id="4_mrdpf"]
 [ext_resource type="Script" path="res://visual_component.gd" id="7_4uie1"]
+[ext_resource type="Texture2D" uid="uid://bbfd7qxfhxcex" path="res://Assets/UI/healthcore.png" id="9_2ddkq"]
 [ext_resource type="Script" path="res://hit_box.gd" id="10_8tca8"]
 [ext_resource type="Texture2D" uid="uid://idgct8tfrde5" path="res://Assets/Bullets/Bullet2.png" id="11_2h6ju"]
 
@@ -92,12 +93,23 @@ offset_bottom = 706.0
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="BulletSprite" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(40, 668)
+[node name="BulletSprite" type="Sprite2D" parent="CanvasLayer/AmmoLabel"]
+position = Vector2(30, 16)
 scale = Vector2(0.572701, 0.449153)
 texture = ExtResource("11_2h6ju")
 region_enabled = true
 region_rect = Rect2(1.5, 0, 70, 118)
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer"]
+offset_left = 85.0
+offset_top = 580.0
+offset_right = 148.0
+offset_bottom = 622.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/HealthLabel"]
+position = Vector2(-43, 20)
+scale = Vector2(0.201827, 0.19702)
+texture = ExtResource("9_2ddkq")
 
 [node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("center_node")]
 position = Vector2(1172, 368)

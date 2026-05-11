@@ -19,12 +19,12 @@ func _process(delta):
 
 	# Phase 2
 	if not phase_two_triggered:
-		if health.current_health <= 97:
+		if health.current_health <= 95:
 			enter_phase_two()
 
 	# Phase 3
 	if not phase_three_triggered:
-		if health.current_health <= 92:
+		if health.current_health <= 88:
 			enter_phase_three()
 
 func enter_phase_two():
@@ -32,7 +32,7 @@ func enter_phase_two():
 
 	print("PHASE 2")
 
-	attack.fire_rate = 0.3
+	attack.fire_rate = 0.4
 
 	visuals.set_phase_2()
 

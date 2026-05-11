@@ -4,7 +4,9 @@ extends Node2D
 @onready var enemy = $EnemyCenter
 @onready var shoot = $Player/ShootComponent
 @onready var ammo_label = $CanvasLayer/AmmoLabel
-@onready var bullet_icon = $CanvasLayer/BulletSprite
+@onready var bullet_icon = $CanvasLayer/AmmoLabel/BulletSprite
+
+@onready var health_label = $CanvasLayer/HealthLabel
 
 var game_over = false
 var level := 1
@@ -14,9 +16,11 @@ func _ready():
 
 	# initialize UI
 	_on_ammo_changed(shoot.current_ammo, shoot.max_ammo)
+	
 	var player_health = player.get_node("HealthComponent")
+	player_health.health_changed.connect(_on_health_changed)
 	var enemy_health = enemy.get_node("HealthComponent")
-
+	_on_health_changed(player_health.current_health, player_health.max_health)
 	player_health.died.connect(_on_player_died)
 	enemy_health.died.connect(_on_enemy_died)
 
@@ -39,3 +43,6 @@ func _on_ammo_changed(current, max_ammo):
 	else:
 		ammo_label.text = " %d / %d" % [current, max_ammo]
 		bullet_icon.visible = true
+		
+func _on_health_changed(current, max_health):
+	health_label.text = "%d / %d" % [current, max_health]
