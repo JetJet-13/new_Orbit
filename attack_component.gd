@@ -7,8 +7,11 @@ extends Node
 
 var normal_bullet_texture = preload("res://Assets/Bullets/DarkBall.png")
 var phase2_bullet_texture = preload("res://Assets/Bullets/ColdIronShot.png")
+var phase3_bullet_texture = preload("res://Assets/Bullets/spiderBullet.png")
 
 var current_bullet_texture
+
+var use_predictive_targeting := false
 
 func _ready():
 	current_bullet_texture = normal_bullet_texture
@@ -33,6 +36,14 @@ func shoot():
 
 	bullet.global_position = owner_node.global_position
 
-	var dir = (player.global_position - owner_node.global_position).normalized()
+	var target_position = player.global_position
 
+	if use_predictive_targeting:
+		var orbit = player.get_node("OrbitComponent")
+
+		var prediction_time = 0.7
+
+		target_position += orbit.velocity * prediction_time
+
+	var dir = (target_position - owner_node.global_position).normalized()
 	bullet.direction = dir

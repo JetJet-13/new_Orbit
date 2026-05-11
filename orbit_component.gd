@@ -8,12 +8,19 @@ var radius = 200.0
 var angular_speed = 2.0
 var direction = 1
 
+var velocity := Vector2.ZERO
+var last_position := Vector2.ZERO
+
 # Dash
 var is_dashing = false
 var dash_speed = 8.0
 var dash_duration = 0.25
 var can_dash = true
 var dash_cooldown = 0.4
+
+func _ready():
+	if owner_node:
+		last_position = owner_node.global_position
 
 func _process(delta):
 	# 🛑 Safety checks (prevents your crash)
@@ -36,6 +43,9 @@ func _process(delta):
 	# 🔁 Face center
 	var dir_to_center = (center_node.global_position - owner_node.global_position).normalized()
 	owner_node.rotation = dir_to_center.angle() + PI / 1
+	
+	velocity = (owner_node.global_position - last_position) / delta
+	last_position = owner_node.global_position
 
 
 func handle_direction_input(input_dir):

@@ -60,6 +60,7 @@ texture = ExtResource("2_414ka")
 
 [node name="HealthComponent" type="Node" parent="EnemyCenter"]
 script = ExtResource("1_kbvf7")
+max_health = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCenter"]
 shape = SubResource("CircleShape2D_yihcj")
