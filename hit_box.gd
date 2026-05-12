@@ -11,5 +11,5 @@ func _on_area_entered(area):
 	if not area.is_in_group(takes_damage_from):
 		return
 
-	health.take_damage(1)
+	health.take_damage(1, area.global_position)
 	area.queue_free()

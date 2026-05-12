@@ -21,14 +21,20 @@ func _ready():
 	emit_signal("health_changed", current_health, max_health)
 
 
-func take_damage(amount: int):
-	var explosion = explosion_scene.instantiate()
+func take_damage(amount: int, hit_position = null):
+	if hit_position != null:
 
-	get_tree().current_scene.add_child(explosion)
+		var explosion = explosion_scene.instantiate()
 
-	explosion.global_position = get_parent().global_position
+		get_tree().current_scene.add_child(explosion)
+		var random_offset = Vector2(
+			randf_range(-10, 10),
+			randf_range(-10, 10)
+		)
 
-	explosion.set_explosion_scale(0.1)
+		explosion.global_position = hit_position + random_offset
+
+		explosion.set_explosion_scale(0.1)
 	
 	# 🛑 block damage if invincible
 	
