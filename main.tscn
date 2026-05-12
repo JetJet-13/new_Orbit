@@ -144,3 +144,5 @@ takes_damage_from = "enemy_bullets"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HitBox"]
 position = Vector2(12, 2)
 shape = SubResource("CapsuleShape2D_ojofu")
+
+[node name="OverlayLayer" type="CanvasLayer" parent="."]

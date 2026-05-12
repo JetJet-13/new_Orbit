@@ -1,0 +1,107 @@
+[gd_scene load_steps=13 format=3 uid="uid://taqg8yrgqam"]
+
+[ext_resource type="Script" path="res://explosion_transition.gd" id="1_4begl"]
+[ext_resource type="Texture2D" uid="uid://boy0q0mjxbrlq" path="res://Assets/Effects/explosion pack 1/Explosions pack/explosion-1-a/spritesheet.png" id="1_nojxm"]
+[ext_resource type="Script" path="res://animated_sprite_2d.gd" id="3_ffouu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ytin"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5qu1"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqg4y"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wq30"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg4tn"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj6qu"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuk6o"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd147"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uudu8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ytin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5qu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqg4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wq30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pg4tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj6qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuk6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bd147")
+}],
+"loop": true,
+"name": &"Explosion",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="ExplosionTransition" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_4begl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 1240.0
+offset_bottom = 672.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(523, 219)
+scale = Vector2(1.875, 1.625)
+sprite_frames = SubResource("SpriteFrames_uudu8")
+animation = &"Explosion"
+frame = 1
+frame_progress = 0.700714
+script = ExtResource("3_ffouu")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

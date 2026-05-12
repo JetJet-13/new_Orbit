@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://taqg8yrgqam"]
+
+[ext_resource type="Script" path="res://explosion_transition.gd" id="1_4begl"]
+[ext_resource type="Texture2D" uid="uid://boy0q0mjxbrlq" path="res://Assets/Effects/explosion pack 1/Explosions pack/explosion-1-a/spritesheet.png" id="1_nojxm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ytin"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5qu1"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqg4y"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wq30"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg4tn"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj6qu"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuk6o"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd147"]
+atlas = ExtResource("1_nojxm")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uudu8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ytin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5qu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqg4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wq30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pg4tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj6qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuk6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bd147")
+}],
+"loop": false,
+"name": &"Explosion",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_q1s22"]
+
+[node name="ExplosionTransition" type="Node2D"]
+script = ExtResource("1_4begl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.50001, -1.99999)
+scale = Vector2(7.21875, 6.625)
+sprite_frames = SubResource("SpriteFrames_uudu8")
+animation = &"Explosion"
+frame = 1
+frame_progress = 0.700714
+script = SubResource("GDScript_q1s22")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
