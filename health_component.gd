@@ -10,6 +10,8 @@ signal died
 var current_health: int
 var is_invincible := false
 
+var explosion_scene = preload("res://explosion_transition.tscn")
+
 # flashing
 var flashing := false
 var flash_speed := 0.08
@@ -20,7 +22,16 @@ func _ready():
 
 
 func take_damage(amount: int):
+	var explosion = explosion_scene.instantiate()
+
+	get_tree().current_scene.add_child(explosion)
+
+	explosion.global_position = get_parent().global_position
+
+	explosion.set_explosion_scale(0.1)
+	
 	# 🛑 block damage if invincible
+	
 	if use_invincibility and is_invincible:
 		return
 

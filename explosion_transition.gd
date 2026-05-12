@@ -9,6 +9,8 @@ func _ready():
 
 	explosion.animation_finished.connect(_on_finished)
 
+func set_explosion_scale(size):
+	scale = Vector2(size, size)
 
 func _on_finished():
 
