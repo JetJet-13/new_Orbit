@@ -69,13 +69,11 @@ func spawn_explosion():
 
 	explosion.global_position = global_position
 	
-func _on_transition_finished():
-
-	show_upgrade_menu()
 	
 func show_upgrade_menu():
 
 	var menu = upgrade_menu_scene.instantiate()
 
 	get_tree().current_scene.get_node("OverlayLayer").add_child(menu)
-	
+
+	menu.setup(get_tree().current_scene.player)
