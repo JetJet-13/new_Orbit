@@ -75,6 +75,7 @@ animations = [{
 [sub_resource type="GDScript" id="GDScript_q1s22"]
 
 [node name="ExplosionTransition" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_4begl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
