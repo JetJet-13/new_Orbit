@@ -7,6 +7,7 @@ extends Node2D
 
 var phase_two_triggered := false
 var phase_three_triggered = false
+var phase_four_triggered = false
 
 var explosion_scene = preload("res://explosion_transition.tscn")
 var upgrade_menu_scene = preload("res://upgrade_menu.tscn")
@@ -58,9 +59,22 @@ func enter_phase_three():
 	visuals.set_phase_3()
 	attack.current_bullet_texture = attack.phase3_bullet_texture
 	print("PHASE 3")
+	
+func enter_phase_four():
+	phase_four_triggered = true
+	#Transition to upgrade menu
+	spawn_explosion()
+	await get_tree().create_timer(0.5).timeout
+	get_tree().paused = true
+	show_upgrade_menu()
+	
+	visuals.set_phase_3()
+	attack.current_bullet_texture = attack.phase3_bullet_texture
+	print("PHASE 3")
 
 	attack.use_predictive_targeting = true
-	
+
+
 func spawn_explosion():
 
 	var explosion = explosion_scene.instantiate()

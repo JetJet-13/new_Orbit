@@ -5,6 +5,7 @@ extends Node
 var normal_texture = preload("res://Assets/Enemy/DarkWaveShip.png")
 var phase2_texture = preload("res://Assets/Enemy/ColdIron.png")
 var phase3_texture = preload("res://Assets/Enemy/SpiderShip.png")
+#var phase4_texture = 
 
 func set_phase_1():
 	sprite.texture = normal_texture
