@@ -14,6 +14,7 @@ var upgrade_menu_scene = preload("res://upgrade_menu.tscn")
 
 func _ready():
 	health.died.connect(die)
+	#attack.use_predictive_targeting = true
 
 func die():
 	print("Enemy died")
@@ -74,7 +75,6 @@ func enter_phase_four():
 	visuals.set_phase_4()
 	attack.current_bullet_texture = attack.phase4_bullet_texture
 	attack.use_predictive_targeting = true
-	#attack.use_split_shot =true
 
 
 func spawn_explosion():

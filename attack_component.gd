@@ -14,7 +14,6 @@ var current_bullet_texture
 
 #bullet specialties
 var use_predictive_targeting := false
-var use_split_shot = false
 
 func _ready():
 	current_bullet_texture = normal_bullet_texture
@@ -44,28 +43,11 @@ func shoot():
 	if use_predictive_targeting:
 		var orbit = player.get_node("OrbitComponent")
 
-		var prediction_time = 2.0
+		var prediction_time = 20
 
 		target_position += orbit.velocity * prediction_time
 
 	var dir = (target_position - owner_node.global_position).normalized()
 	bullet.direction = dir
 	
-	if use_split_shot:
-		fire_offset_bullet(dir)
-
-func fire_offset_bullet(main_dir):
-
-	var bullet = bullet_scene.instantiate()
-
-	get_tree().current_scene.add_child(bullet)
-
-	bullet.global_position = owner_node.global_position
-
-	var random_angle = randf_range(-0.4, 0.4)
-
-	var offset_dir = main_dir.rotated(random_angle)
-
-	bullet.direction = offset_dir
-
-	bullet.set_bullet_texture(current_bullet_texture)
+	
