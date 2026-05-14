@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c40pyo6x76qx8"]
+[gd_scene load_steps=19 format=3 uid="uid://c40pyo6x76qx8"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5l6if"]
 [ext_resource type="Script" path="res://enemy_center.gd" id="1_btu2p"]
@@ -10,9 +10,10 @@
 [ext_resource type="Script" path="res://shoot_component.gd" id="4_ees30"]
 [ext_resource type="Script" path="res://attack_component.gd" id="4_mrdpf"]
 [ext_resource type="Script" path="res://visual_component.gd" id="7_4uie1"]
+[ext_resource type="Texture2D" uid="uid://cfhqp1psruqne" path="res://Assets/UI/Ammo.png" id="8_6pr1w"]
 [ext_resource type="Texture2D" uid="uid://bbfd7qxfhxcex" path="res://Assets/UI/healthcore.png" id="9_2ddkq"]
+[ext_resource type="Texture2D" uid="uid://14wawj1sdxnm" path="res://Assets/UI/Reload_Icon.png" id="9_usqi0"]
 [ext_resource type="Script" path="res://hit_box.gd" id="10_8tca8"]
-[ext_resource type="Texture2D" uid="uid://idgct8tfrde5" path="res://Assets/Bullets/Bullet2.png" id="11_2h6ju"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yihcj"]
 radius = 18.2483
@@ -94,11 +95,16 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="BulletSprite" type="Sprite2D" parent="CanvasLayer/AmmoLabel"]
-position = Vector2(30, 16)
-scale = Vector2(0.572701, 0.449153)
-texture = ExtResource("11_2h6ju")
-region_enabled = true
+position = Vector2(36, 19)
+scale = Vector2(0.18492, 0.171559)
+texture = ExtResource("8_6pr1w")
 region_rect = Rect2(1.5, 0, 70, 118)
+
+[node name="ReloadSprite" type="Sprite2D" parent="CanvasLayer/AmmoLabel"]
+visible = false
+position = Vector2(36, 18)
+scale = Vector2(0.201125, 0.182275)
+texture = ExtResource("9_usqi0")
 
 [node name="HealthLabel" type="Label" parent="CanvasLayer"]
 offset_left = 85.0
@@ -107,7 +113,7 @@ offset_right = 148.0
 offset_bottom = 622.0
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/HealthLabel"]
-position = Vector2(-43, 20)
+position = Vector2(-37, 11)
 scale = Vector2(0.201827, 0.19702)
 texture = ExtResource("9_2ddkq")
 

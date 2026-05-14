@@ -5,6 +5,7 @@ extends Node2D
 @onready var shoot = $Player/ShootComponent
 @onready var ammo_label = $CanvasLayer/AmmoLabel
 @onready var bullet_icon = $CanvasLayer/AmmoLabel/BulletSprite
+@onready var reload_sprite = $CanvasLayer/AmmoLabel/ReloadSprite
 
 @onready var health_label = $CanvasLayer/HealthLabel
 
@@ -36,13 +37,23 @@ func _on_enemy_died():
 	
 	#print("YOU WIN")
 	
-func _on_ammo_changed(current, max_ammo):
+func _process(delta):
+
 	if shoot.is_reloading:
+
+		reload_sprite.rotation += 6 * delta
+	
+func _on_ammo_changed(current, max_ammo):
+
+	if shoot.is_reloading:
+		reload_sprite.visible = true
 		bullet_icon.visible = false
-		ammo_label.text = "Reloading..."
+		ammo_label.text = "  "
+
 	else:
-		ammo_label.text = " %d / %d" % [current, max_ammo]
+		reload_sprite.visible = false
 		bullet_icon.visible = true
+		ammo_label.text = " %d / %d" % [current, max_ammo]
 		
 func _on_health_changed(current, max_health):
 	health_label.text = "%d / %d" % [current, max_health]

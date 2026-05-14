@@ -54,4 +54,3 @@ func start_reload():
 	current_ammo = max_ammo
 	is_reloading = false
 	emit_signal("ammo_changed", current_ammo, max_ammo)
-	print("Reloaded:", current_ammo)

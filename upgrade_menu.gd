@@ -4,6 +4,13 @@ extends Control
 @onready var button2 = $VBoxContainer/Button2
 @onready var button3 = $VBoxContainer/Button3
 
+var upgrade_icons = {
+	"+1 Ammo": preload("res://Assets/UI/Ammo.png"),
+	"+1 Health": preload("res://Assets/UI/healthcore.png"),
+	"-0.3s Reload": preload("res://Assets/UI/Reload_Icon.png"),
+	"+0.5 Invincibility": preload("res://Assets/UI/Invincible_Icon.png")
+}
+
 @onready var buttons = [
 	$VBoxContainer/Button,
 	$VBoxContainer/Button2,
@@ -49,7 +56,13 @@ func assign_buttons():
 
 	for i in range(buttons.size()):
 
-		buttons[i].text = current_upgrades[i]
+		var upgrade = current_upgrades[i]
+
+		buttons[i].text = upgrade
+
+		var icon = buttons[i].get_node("TextureRect")
+
+		icon.texture = upgrade_icons[upgrade]
 
 func enable_buttons():
 
