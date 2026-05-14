@@ -73,9 +73,8 @@ func enter_phase_four():
 	
 	visuals.set_phase_4()
 	attack.current_bullet_texture = attack.phase4_bullet_texture
-	print("PHASE 4")
-
 	attack.use_predictive_targeting = true
+	#attack.use_split_shot =true
 
 
 func spawn_explosion():

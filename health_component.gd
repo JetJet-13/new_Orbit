@@ -50,6 +50,9 @@ func take_damage(amount: int, hit_position = null):
 
 	if current_health <= 0:
 		emit_signal("died")
+		await get_tree().create_timer(0.5, true).timeout
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://game_over.tscn")
 		return
 
 	# 🟢 start i-frames
