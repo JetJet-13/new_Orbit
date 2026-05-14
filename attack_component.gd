@@ -9,6 +9,7 @@ extends Node
 var normal_bullet_texture = preload("res://Assets/Bullets/DarkBall.png")
 var phase2_bullet_texture = preload("res://Assets/Bullets/ColdIronShot.png")
 var phase3_bullet_texture = preload("res://Assets/Bullets/spiderBullet.png")
+var phase4_bullet_texture = preload("res://Assets/Bullets/Space_Acid.png")
 var current_bullet_texture
 
 #bullet specialties

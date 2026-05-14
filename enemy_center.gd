@@ -21,15 +21,18 @@ func die():
 
 func _process(delta):
 
-	# Phase 2
+	# Phase 2 7hp
 	if not phase_two_triggered:
 		if health.current_health <= 95:
 			enter_phase_two()
-
-	# Phase 3
+	# Phase 3 9hp
 	if not phase_three_triggered:
 		if health.current_health <= 88:
 			enter_phase_three()
+	#Phase 4 11hp
+	if not phase_four_triggered:
+		if health.current_health <= 77:
+			enter_phase_four()
 
 func enter_phase_two():
 	phase_two_triggered = true
@@ -68,9 +71,9 @@ func enter_phase_four():
 	get_tree().paused = true
 	show_upgrade_menu()
 	
-	visuals.set_phase_3()
-	attack.current_bullet_texture = attack.phase3_bullet_texture
-	print("PHASE 3")
+	visuals.set_phase_4()
+	attack.current_bullet_texture = attack.phase4_bullet_texture
+	print("PHASE 4")
 
 	attack.use_predictive_targeting = true
 
