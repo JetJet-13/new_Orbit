@@ -4,7 +4,7 @@ extends Node
 @export var center_node: Node2D
 
 var angle = 0.0
-var radius = 200.0
+var radius = 300.0
 var angular_speed = 2.0
 var direction = 1
 

@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4gfvm4tnm8lx"]
+
+[ext_resource type="Script" path="res://BaseMenu/base_menu.gd" id="1_v4il2"]
+
+[node name="BaseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_v4il2")
+
+[node name="StartButton" type="Button" parent="."]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 2
+offset_left = 556.0
+offset_top = 169.0
+offset_right = 806.0
+offset_bottom = 244.0
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="."]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 2
+offset_left = 561.0
+offset_top = 463.0
+offset_right = 811.0
+offset_bottom = 538.0
+text = "QUIT
+"
+
+[node name="SettingsButton" type="Button" parent="."]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 2
+offset_left = 557.0
+offset_top = 264.0
+offset_right = 807.0
+offset_bottom = 339.0
+text = "SETTINGS"
+
+[node name="CreditsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 562.0
+offset_top = 369.0
+offset_right = 807.0
+offset_bottom = 441.0
+text = "CREDITS"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
