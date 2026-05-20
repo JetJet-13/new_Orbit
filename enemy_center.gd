@@ -14,7 +14,7 @@ var upgrade_menu_scene = preload("res://upgrade_menu.tscn")
 
 func _ready():
 	health.died.connect(die)
-	#attack.use_predictive_targeting = true
+	
 
 func die():
 	print("Enemy died")
@@ -44,11 +44,9 @@ func enter_phase_two():
 	show_upgrade_menu()
 
 	print("PHASE 2")
-
-	attack.fire_rate = 0.4
-
+	#attack.fire_rate = 0.4
+	attack.attack_mode = attack.AttackMode.PREDICTIVE
 	visuals.set_phase_2()
-
 	attack.current_bullet_texture = attack.phase2_bullet_texture
 	
 func enter_phase_three():
@@ -59,7 +57,7 @@ func enter_phase_three():
 	get_tree().paused = true
 	show_upgrade_menu()
 	
-	attack.fire_rate = 0.3
+	attack.attack_mode = attack.AttackMode.MIXED
 	visuals.set_phase_3()
 	attack.current_bullet_texture = attack.phase3_bullet_texture
 	print("PHASE 3")
@@ -72,9 +70,11 @@ func enter_phase_four():
 	get_tree().paused = true
 	show_upgrade_menu()
 	
+	attack.attack_mode = attack.AttackMode.MIXED
+	attack.fire_rate = 0.7
 	visuals.set_phase_4()
 	attack.current_bullet_texture = attack.phase4_bullet_texture
-	attack.use_predictive_targeting = true
+	
 
 
 func spawn_explosion():

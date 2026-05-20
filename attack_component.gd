@@ -12,8 +12,14 @@ var phase3_bullet_texture = preload("res://Assets/Bullets/spiderBullet.png")
 var phase4_bullet_texture = preload("res://Assets/Bullets/Space_Acid.png")
 var current_bullet_texture
 
-#bullet specialties
-var use_predictive_targeting := false
+enum AttackMode {
+	BASIC,
+	PREDICTIVE,
+	MIXED
+}
+var attack_mode = AttackMode.BASIC
+var shot_count := 0
+
 
 func _ready():
 	current_bullet_texture = normal_bullet_texture
@@ -27,8 +33,11 @@ func start_firing():
 
 
 func shoot():
+
 	if player == null:
 		return
+
+	shot_count += 1
 
 	var bullet = bullet_scene.instantiate()
 
@@ -40,14 +49,25 @@ func shoot():
 
 	var target_position = player.global_position
 
-	if use_predictive_targeting:
-		var orbit = player.get_node("OrbitComponent")
+	var orbit = player.get_node("OrbitComponent")
+
+	# PHASE 2: fully predictive
+	if attack_mode == AttackMode.PREDICTIVE:
 
 		var prediction_time = 20
 
 		target_position += orbit.velocity * prediction_time
 
+	# PHASE 3: mixed targeting
+	elif attack_mode == AttackMode.MIXED:
+
+		# every 3rd shot becomes normal
+		if shot_count % 3 != 0:
+
+			var prediction_time = 20
+
+			target_position += orbit.velocity * prediction_time
+
 	var dir = (target_position - owner_node.global_position).normalized()
+
 	bullet.direction = dir
-	
-	

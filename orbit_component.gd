@@ -2,10 +2,10 @@ extends Node
 
 @onready var owner_node = get_parent()
 @export var center_node: Node2D
+@export var radius = 200.0
 
 var angle = 0.0
-var radius = 300.0
-var angular_speed = 1.5
+var angular_speed = 1.0
 var direction = 1
 
 var velocity := Vector2.ZERO
@@ -13,10 +13,10 @@ var last_position := Vector2.ZERO
 
 # Dash
 var is_dashing = false
-var dash_speed = 8.0
+var dash_speed = 3.0
 var dash_duration = 0.25
 var can_dash = true
-var dash_cooldown = 0.4
+var dash_cooldown = 3.0
 
 func _ready():
 	if owner_node:
