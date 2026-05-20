@@ -2,6 +2,8 @@ extends Node
 
 @onready var sprite = get_parent().get_node("Sprite2D")
 
+
+
 var normal_texture = preload("res://Assets/Enemy/DarkWaveShip.png")
 var phase2_texture = preload("res://Assets/Enemy/ColdIron.png")
 var phase3_texture = preload("res://Assets/Enemy/SpiderShip.png")
@@ -18,3 +20,4 @@ func set_phase_3():
 
 func set_phase_4():
 	sprite.texture = phase4_texture
+	

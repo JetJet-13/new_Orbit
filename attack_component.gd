@@ -20,6 +20,7 @@ enum AttackMode {
 var attack_mode = AttackMode.BASIC
 var shot_count := 0
 
+var target_rotation := 0.0
 
 func _ready():
 	current_bullet_texture = normal_bullet_texture
@@ -38,14 +39,6 @@ func shoot():
 		return
 
 	shot_count += 1
-
-	var bullet = bullet_scene.instantiate()
-
-	get_tree().current_scene.add_child(bullet)
-
-	bullet.set_bullet_texture(current_bullet_texture)
-
-	bullet.global_position = owner_node.global_position
 
 	var target_position = player.global_position
 
@@ -68,6 +61,27 @@ func shoot():
 
 			target_position += orbit.velocity * prediction_time
 
+	# Aim direction
 	var dir = (target_position - owner_node.global_position).normalized()
 
+	# Desired enemy rotation
+	target_rotation = dir.angle() - PI / 2
+	await get_tree().create_timer(0.2).timeout
+
+	# Spawn bullet
+	var bullet = bullet_scene.instantiate()
+
+	get_tree().current_scene.add_child(bullet)
+
+	bullet.set_bullet_texture(current_bullet_texture)
+
+	bullet.global_position = owner_node.global_position
+
 	bullet.direction = dir
+
+func _process(delta):
+
+	owner_node.rotation = lerp_angle(
+		owner_node.rotation,
+		target_rotation,10 * delta
+	)

@@ -5,7 +5,7 @@ extends Node
 @export var radius = 200.0
 
 var angle = 0.0
-var angular_speed = 1.0
+var angular_speed = 0.8
 var direction = 1
 
 var velocity := Vector2.ZERO

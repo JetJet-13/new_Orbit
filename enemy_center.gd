@@ -21,7 +21,7 @@ func die():
 	queue_free()
 
 func _process(delta):
-
+	
 	# Phase 2 7hp
 	if not phase_two_triggered:
 		if health.current_health <= 95:
