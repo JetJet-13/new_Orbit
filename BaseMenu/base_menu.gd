@@ -1,5 +1,10 @@
 extends Control
 
+var menu_music =preload("res://Assets/Music/Approaching_Zenith.ogg")
+
+func _ready():
+	MusicManager.play_music(menu_music)
+
 signal start_pressed
 signal settings_pressed
 signal quit_pressed

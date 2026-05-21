@@ -13,7 +13,8 @@ var is_reloading := false
 signal ammo_changed(current, max)
 
 func shoot():
-	
+	if orbit_component.is_dashing:
+		return
 	orbit_component.current_tilt = 2
 	
 	if center_node == null:
@@ -45,7 +46,7 @@ func shoot():
 	if current_ammo <= 0:
 		start_reload()
 	
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(1.0).timeout
 	orbit_component.shoot_tilt = false
 
 func start_reload():

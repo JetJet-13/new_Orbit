@@ -21,10 +21,10 @@ text = "Start"
 [node name="QuitButton" type="Button" parent="."]
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
-offset_left = 561.0
-offset_top = 463.0
-offset_right = 811.0
-offset_bottom = 538.0
+offset_left = 562.0
+offset_top = 456.0
+offset_right = 812.0
+offset_bottom = 531.0
 text = "QUIT
 "
 
@@ -39,10 +39,10 @@ text = "SETTINGS"
 
 [node name="CreditsButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 562.0
-offset_top = 369.0
-offset_right = 807.0
-offset_bottom = 441.0
+offset_left = 561.0
+offset_top = 363.0
+offset_right = 810.0
+offset_bottom = 435.0
 text = "CREDITS"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

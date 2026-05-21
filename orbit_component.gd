@@ -9,14 +9,16 @@ var angular_speed = 0.8
 var direction = 1
 var current_tilt := 0.0
 var shoot_tilt := false
+var target_rotation = 0
 
 var velocity := Vector2.ZERO
 var last_position := Vector2.ZERO
 
 # Dash
+var dash_tilt := false
 var is_dashing = false
 var dash_speed = 3.0
-var dash_duration = 0.25
+var dash_duration = 0.3
 var can_dash = true
 var dash_cooldown = 3.0
 
@@ -46,13 +48,15 @@ func _process(delta):
 	var dir_to_center = (center_node.global_position - owner_node.global_position).normalized()
 
 	var target_tilt = -0.8 * direction
-
-	if shoot_tilt:
-		target_tilt = 0.0
-
-	current_tilt = lerp(current_tilt,target_tilt,10 * delta)
-
-	var target_rotation = dir_to_center.angle() + PI + current_tilt
+	
+	if dash_tilt:
+		target_rotation = velocity.angle() + PI * 1
+		
+	else:
+		if shoot_tilt:
+			target_tilt = 0.0
+		current_tilt = lerp(current_tilt,target_tilt,10 * delta)
+		target_rotation = dir_to_center.angle() + PI + current_tilt
 
 	owner_node.rotation = lerp_angle(owner_node.rotation,target_rotation,8 * delta)
 	velocity = (owner_node.global_position - last_position) / delta
@@ -75,10 +79,11 @@ func try_dash():
 
 func dash():
 	is_dashing = true
+	dash_tilt = true
 	can_dash = false
 
 	await get_tree().create_timer(dash_duration).timeout
 	is_dashing = false
-
+	dash_tilt = false
 	await get_tree().create_timer(dash_cooldown).timeout
 	can_dash = true

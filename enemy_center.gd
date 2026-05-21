@@ -12,9 +12,13 @@ var phase_four_triggered = false
 var explosion_scene = preload("res://explosion_transition.tscn")
 var upgrade_menu_scene = preload("res://upgrade_menu.tscn")
 
+#Music
+var phase1Music = preload("res://Assets/Music/Orbit_Breach.ogg")
+var phase2Music = preload("res://Assets/Music/Sector_Nine_Lockdown.ogg")
+
 func _ready():
 	health.died.connect(die)
-	
+	MusicManager.play_music(phase1Music)
 
 func die():
 	print("Enemy died")
@@ -36,6 +40,7 @@ func _process(delta):
 			enter_phase_four()
 
 func enter_phase_two():
+	MusicManager.play_music(phase2Music)
 	phase_two_triggered = true
 	#Transition to upgrade menu
 	spawn_explosion()
@@ -43,8 +48,6 @@ func enter_phase_two():
 	get_tree().paused = true
 	show_upgrade_menu()
 
-	print("PHASE 2")
-	#attack.fire_rate = 0.4
 	attack.attack_mode = attack.AttackMode.PREDICTIVE
 	visuals.set_phase_2()
 	attack.current_bullet_texture = attack.phase2_bullet_texture
@@ -58,9 +61,10 @@ func enter_phase_three():
 	show_upgrade_menu()
 	
 	attack.attack_mode = attack.AttackMode.MIXED
+	attack.fire_rate = 0.7
 	visuals.set_phase_3()
 	attack.current_bullet_texture = attack.phase3_bullet_texture
-	print("PHASE 3")
+	
 	
 func enter_phase_four():
 	phase_four_triggered = true
@@ -71,7 +75,7 @@ func enter_phase_four():
 	show_upgrade_menu()
 	
 	attack.attack_mode = attack.AttackMode.MIXED
-	attack.fire_rate = 0.7
+	attack.fire_rate = 0.6
 	visuals.set_phase_4()
 	attack.current_bullet_texture = attack.phase4_bullet_texture
 	
