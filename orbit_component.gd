@@ -7,6 +7,8 @@ extends Node
 var angle = 0.0
 var angular_speed = 0.8
 var direction = 1
+var current_tilt := 0.0
+var shoot_tilt := false
 
 var velocity := Vector2.ZERO
 var last_position := Vector2.ZERO
@@ -42,8 +44,17 @@ func _process(delta):
 
 	# 🔁 Face center
 	var dir_to_center = (center_node.global_position - owner_node.global_position).normalized()
-	owner_node.rotation = dir_to_center.angle() + PI / 1
-	
+
+	var target_tilt = -0.8 * direction
+
+	if shoot_tilt:
+		target_tilt = 0.0
+
+	current_tilt = lerp(current_tilt,target_tilt,10 * delta)
+
+	var target_rotation = dir_to_center.angle() + PI + current_tilt
+
+	owner_node.rotation = lerp_angle(owner_node.rotation,target_rotation,8 * delta)
 	velocity = (owner_node.global_position - last_position) / delta
 	last_position = owner_node.global_position
 

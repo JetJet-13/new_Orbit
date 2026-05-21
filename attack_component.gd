@@ -5,6 +5,7 @@ extends Node
 @onready var bullet_scene = preload("res://enemy_bullet.tscn")
 @export var player: Node2D
 
+
 #bullet sprtes
 var normal_bullet_texture = preload("res://Assets/Bullets/DarkBall.png")
 var phase2_bullet_texture = preload("res://Assets/Bullets/ColdIronShot.png")
@@ -43,11 +44,15 @@ func shoot():
 	var target_position = player.global_position
 
 	var orbit = player.get_node("OrbitComponent")
-
+	var distance_to_player = owner_node.global_position.distance_to(player.global_position)
+	var bullet_data = bullet_scene.instantiate()
+	var bullet_speed = bullet_data.speed
+	bullet_data.queue_free()
+	
+	var prediction_time = (distance_to_player / bullet_speed) * 2
+	
 	# PHASE 2: fully predictive
 	if attack_mode == AttackMode.PREDICTIVE:
-
-		var prediction_time = 20
 
 		target_position += orbit.velocity * prediction_time
 
@@ -57,9 +62,7 @@ func shoot():
 		# every 3rd shot becomes normal
 		if shot_count % 3 != 0:
 
-			var prediction_time = 20
-
-			target_position += orbit.velocity * prediction_time
+			target_position += orbit.velocity * prediction_time 
 
 	# Aim direction
 	var dir = (target_position - owner_node.global_position).normalized()

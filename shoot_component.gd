@@ -5,6 +5,7 @@ extends Node
 @export var center_node: Node2D
 @export var max_ammo := 8
 @export var reload_time := 1.5
+@onready var orbit_component = get_parent().get_node("OrbitComponent")
 
 var current_ammo := max_ammo
 var is_reloading := false
@@ -12,6 +13,9 @@ var is_reloading := false
 signal ammo_changed(current, max)
 
 func shoot():
+	
+	orbit_component.current_tilt = 2
+	
 	if center_node == null:
 		return
 
@@ -40,6 +44,9 @@ func shoot():
 	# 🔄 auto reload when empty
 	if current_ammo <= 0:
 		start_reload()
+	
+	await get_tree().create_timer(0.8).timeout
+	orbit_component.shoot_tilt = false
 
 func start_reload():
 	if is_reloading:

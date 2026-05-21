@@ -83,8 +83,6 @@ position = Vector2(2.50001, -1.99999)
 scale = Vector2(7.21875, 6.625)
 sprite_frames = SubResource("SpriteFrames_uudu8")
 animation = &"Explosion"
-frame = 1
-frame_progress = 0.700714
 script = SubResource("GDScript_q1s22")
 
 [node name="Label" type="Label" parent="."]
