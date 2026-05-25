@@ -54,15 +54,12 @@ func _process(delta):
 	var dir_to_center = (center_node.global_position - owner_node.global_position).normalized()
 
 	var target_tilt = -0.8 * direction
-	
+	current_tilt = lerp(current_tilt,target_tilt,10 * delta)
+	target_rotation = dir_to_center.angle() + PI + current_tilt
+
 	if dash_tilt:
-		target_rotation = velocity.angle() + PI * 1
-		
-	else:
-		if shoot_tilt:
-			target_tilt = 0.0
-		current_tilt = lerp(current_tilt,target_tilt,10 * delta)
-		target_rotation = dir_to_center.angle() + PI + current_tilt
+		target_rotation = velocity.angle() + PI
+
 
 	var aim_dir = center_node.global_position - cannon.global_position
 	cannon.rotation = aim_dir.angle() + PI / 1

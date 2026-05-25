@@ -1,5 +1,6 @@
 extends Node
 
+@onready var cannon = get_parent().get_node("Cannon")
 @onready var owner_node = get_parent()
 @onready var bullet_scene = preload("res://bullet.tscn")
 @export var center_node: Node2D
