@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4gfvm4tnm8lx"]
+[gd_scene load_steps=3 format=3 uid="uid://c4gfvm4tnm8lx"]
 
 [ext_resource type="Script" path="res://BaseMenu/base_menu.gd" id="1_v4il2"]
+[ext_resource type="Texture2D" uid="uid://dby0ba4m4jq7s" path="res://Assets/UI/MainMenu.png" id="2_clotp"]
 
 [node name="BaseMenu" type="Control"]
 layout_mode = 3
@@ -12,38 +13,43 @@ script = ExtResource("1_v4il2")
 [node name="StartButton" type="Button" parent="."]
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
-offset_left = 556.0
-offset_top = 169.0
-offset_right = 806.0
-offset_bottom = 244.0
+offset_left = 196.0
+offset_top = 311.0
+offset_right = 543.0
+offset_bottom = 386.0
 text = "Start"
 
 [node name="QuitButton" type="Button" parent="."]
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
-offset_left = 562.0
-offset_top = 456.0
-offset_right = 812.0
-offset_bottom = 531.0
+offset_left = 188.0
+offset_top = 543.0
+offset_right = 544.0
+offset_bottom = 618.0
 text = "QUIT
 "
 
 [node name="SettingsButton" type="Button" parent="."]
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
-offset_left = 557.0
-offset_top = 264.0
-offset_right = 807.0
-offset_bottom = 339.0
+offset_left = 191.0
+offset_top = 390.0
+offset_right = 545.0
+offset_bottom = 465.0
 text = "SETTINGS"
 
 [node name="CreditsButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 561.0
-offset_top = 363.0
-offset_right = 810.0
-offset_bottom = 435.0
+offset_left = 194.0
+offset_top = 466.0
+offset_right = 548.0
+offset_bottom = 538.0
 text = "CREDITS"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(637, 360)
+scale = Vector2(0.76555, 0.765675)
+texture = ExtResource("2_clotp")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
