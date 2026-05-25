@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c40pyo6x76qx8"]
+[gd_scene load_steps=20 format=3 uid="uid://c40pyo6x76qx8"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5l6if"]
 [ext_resource type="Script" path="res://enemy_center.gd" id="1_btu2p"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bbfd7qxfhxcex" path="res://Assets/UI/healthcore.png" id="9_2ddkq"]
 [ext_resource type="Texture2D" uid="uid://14wawj1sdxnm" path="res://Assets/UI/Reload_Icon.png" id="9_usqi0"]
 [ext_resource type="Script" path="res://hit_box.gd" id="10_8tca8"]
+[ext_resource type="Texture2D" uid="uid://cpkn2d0j5o3t8" path="res://Assets/UI/Dash Icon.png" id="11_3ftcd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yihcj"]
 radius = 18.2483
@@ -117,6 +118,11 @@ offset_bottom = 622.0
 position = Vector2(-37, 11)
 scale = Vector2(0.201827, 0.19702)
 texture = ExtResource("9_2ddkq")
+
+[node name="DashIcon" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(49, 518)
+scale = Vector2(0.0653527, 0.0594635)
+texture = ExtResource("11_3ftcd")
 
 [node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("center_node")]
 position = Vector2(1172, 368)

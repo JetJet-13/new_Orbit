@@ -1,5 +1,6 @@
 extends Node
 
+@onready var dash_icon = $"../../CanvasLayer/DashIcon"
 @onready var owner_node = get_parent()
 @export var center_node: Node2D
 @export var radius = 200.0
@@ -78,6 +79,7 @@ func try_dash():
 
 
 func dash():
+	dash_icon.modulate = Color(0.3,0.3,0.3,1)
 	is_dashing = true
 	dash_tilt = true
 	can_dash = false
@@ -87,3 +89,4 @@ func dash():
 	dash_tilt = false
 	await get_tree().create_timer(dash_cooldown).timeout
 	can_dash = true
+	dash_icon.modulate = Color(1,1,1,1)

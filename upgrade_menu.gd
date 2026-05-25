@@ -8,7 +8,8 @@ var upgrade_icons = {
 	"+1 Ammo": preload("res://Assets/UI/Ammo.png"),
 	"+1 Health": preload("res://Assets/UI/healthcore.png"),
 	"-0.3s Reload": preload("res://Assets/UI/Reload_Icon.png"),
-	"+0.5 Invincibility": preload("res://Assets/UI/Invincible_Icon.png")
+	"+0.8 Invincibility": preload("res://Assets/UI/Invincible_Icon.png"),
+	"-0.2s DashCooldown": preload("res://Assets/UI/Dash Icon.png")
 }
 
 @onready var buttons = [
@@ -20,6 +21,7 @@ var upgrade_icons = {
 var player
 var health
 var shoot
+var orbit
 var current_upgrades = []
 
 func setup(player_node):
@@ -30,12 +32,15 @@ func setup(player_node):
 	health = player.get_node("HealthComponent")
 
 	shoot = player.get_node("ShootComponent")
+	
+	orbit = player.get_node("OrbitComponent")
 
 var possible_upgrades = [
 	"+1 Ammo",
 	"+1 Health",
 	"-0.3s Reload",
-	"+0.5 Invincibility"
+	"+0.8 Invincibility",
+	"-0.2s DashCooldown"
 ]
 
 func _ready():
@@ -105,9 +110,13 @@ func apply_upgrade(upgrade):
 			shoot.reload_time = max(shoot.reload_time, 0.2)
 
 
-		"+0.5 Invincibility":
+		"+0.8 Invincibility":
 
-			health.invincibility_time += 0.5
+			health.invincibility_time += 0.8
+
+		"-0.2s DashCooldown":
+			orbit.dash_cooldown -= 0.2
+			orbit.dash_cooldown = max(orbit.dash_cooldown,0.3)
 
 
 	get_tree().paused = false
