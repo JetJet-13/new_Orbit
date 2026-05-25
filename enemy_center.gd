@@ -5,6 +5,9 @@ extends Node2D
 
 @export var fire_rate := 0.4
 
+var flashing := false
+var flash_speed := 0.08
+
 var phase_two_triggered := false
 var phase_three_triggered = false
 var phase_four_triggered = false
@@ -97,3 +100,21 @@ func show_upgrade_menu():
 	get_tree().current_scene.get_node("OverlayLayer").add_child(menu)
 
 	menu.setup(get_tree().current_scene.player)
+	
+func flash_loop():
+
+	while flashing:
+		$Sprite2D.visible = not $Sprite2D.visible
+		await get_tree().create_timer(flash_speed).timeout
+		
+func start_flash():
+
+	if flashing:
+		return
+	flashing = true
+	flash_loop()
+
+func stop_flash():
+	flashing = false
+	$Sprite2D.visible = true
+	

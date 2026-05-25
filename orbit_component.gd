@@ -1,6 +1,11 @@
 extends Node
 
 @onready var dash_icon = $"../../CanvasLayer/DashIcon"
+
+@onready var ship_body = get_parent().get_node("ShipBody")
+
+@onready var cannon = get_parent().get_node("Cannon")
+
 @onready var owner_node = get_parent()
 @export var center_node: Node2D
 @export var radius = 200.0
@@ -59,7 +64,9 @@ func _process(delta):
 		current_tilt = lerp(current_tilt,target_tilt,10 * delta)
 		target_rotation = dir_to_center.angle() + PI + current_tilt
 
-	owner_node.rotation = lerp_angle(owner_node.rotation,target_rotation,8 * delta)
+	var aim_dir = center_node.global_position - cannon.global_position
+	cannon.rotation = aim_dir.angle() + PI / 1
+	ship_body.rotation = lerp_angle(ship_body.rotation,target_rotation,8 * delta)
 	velocity = (owner_node.global_position - last_position) / delta
 	last_position = owner_node.global_position
 

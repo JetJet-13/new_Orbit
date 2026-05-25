@@ -111,8 +111,10 @@ func apply_upgrade(upgrade):
 
 
 		"+0.8 Invincibility":
-
-			health.invincibility_time += 0.8
+			var health =player.get_node("HealthComponent")
+			if player.is_in_group("player"):
+				health.invincibility_time += 0.8
+			
 
 		"-0.2s DashCooldown":
 			orbit.dash_cooldown -= 0.2

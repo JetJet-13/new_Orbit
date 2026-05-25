@@ -72,33 +72,15 @@ func heal(amount: int):
 # =========================
 
 func start_invincibility():
+	print ("invincible")
 	is_invincible = true
-	start_flash()
+
+	if get_parent().has_method("start_flash"):
+		get_parent().start_flash()
 
 	await get_tree().create_timer(invincibility_time).timeout
 
 	is_invincible = false
-	stop_flash()
 
-
-# =========================
-# ✨ FLASHING EFFECT
-# =========================
-
-func start_flash():
-	flashing = true
-	flash_loop()
-
-
-func stop_flash():
-	flashing = false
-
-	var sprite = get_parent().get_node("Sprite2D")
-	sprite.visible = true
-
-
-func flash_loop():
-	while flashing:
-		var sprite = get_parent().get_node("Sprite2D")
-		sprite.visible = not sprite.visible
-		await get_tree().create_timer(flash_speed).timeout
+	if get_parent().has_method("stop_flash"):
+		get_parent().stop_flash()

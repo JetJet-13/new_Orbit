@@ -6,7 +6,6 @@ extends Node
 @onready var active_player = player_a
 @onready var inactive_player = player_b
 
-
 func play_music(track):
 
 	if active_player.stream == track and active_player.playing:

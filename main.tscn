@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://c40pyo6x76qx8"]
+[gd_scene load_steps=21 format=3 uid="uid://c40pyo6x76qx8"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5l6if"]
 [ext_resource type="Script" path="res://enemy_center.gd" id="1_btu2p"]
 [ext_resource type="Script" path="res://health_component.gd" id="1_kbvf7"]
-[ext_resource type="Texture2D" uid="uid://c87u5rwk4fma3" path="res://Assets/spaceships/First_Ship.png" id="1_yclm8"]
 [ext_resource type="Script" path="res://orbit_component.gd" id="2_3eql5"]
 [ext_resource type="Texture2D" uid="uid://bb65fayd5bvpc" path="res://Assets/Enemy/DarkWaveShip.png" id="2_414ka"]
 [ext_resource type="Script" path="res://input_component.gd" id="3_7hpys"]
@@ -15,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://14wawj1sdxnm" path="res://Assets/UI/Reload_Icon.png" id="9_usqi0"]
 [ext_resource type="Script" path="res://hit_box.gd" id="10_8tca8"]
 [ext_resource type="Texture2D" uid="uid://cpkn2d0j5o3t8" path="res://Assets/UI/Dash Icon.png" id="11_3ftcd"]
+[ext_resource type="Texture2D" uid="uid://chjcsjar00sac" path="res://Assets/spaceships/Ship_Base_1.png" id="12_nwtqc"]
+[ext_resource type="Texture2D" uid="uid://c54lpbodplk3o" path="res://Assets/spaceships/Blaster_1.png" id="13_3r8it"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yihcj"]
 radius = 18.2483
@@ -30,6 +31,12 @@ script/source = "extends Node
 @onready var bullet_scene = preload(\"res://bullet.tscn\")
 @export var center_node: Node2D
 
+var flashing := false
+var flash_speed := 0.08
+
+func _ready():
+	add_to_group(\"player\")
+
 func shoot():
 	if center_node == null:
 		return
@@ -42,6 +49,27 @@ func shoot():
 	bullet.direction = dir
 
 	get_tree().current_scene.add_child(bullet)
+
+func flash_loop():
+
+	while flashing:
+		$ShipBody/ShipSprite.visible = not $ShipBody/ShipSprite.visible
+		$Cannon/CannonSprite.visible = not $Cannon/CannonSprite.visible
+		await get_tree().create_timer(flash_speed).timeout
+
+func start_flash():
+
+	if flashing:
+		return
+	flashing = true
+	flash_loop()
+
+func stop_flash():
+
+	flashing = false
+
+	$ShipBody/ShipSprite.visible = true
+	$Cannon/CannonSprite.visible = true
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ojofu"]
@@ -129,12 +157,6 @@ position = Vector2(1172, 368)
 script = SubResource("GDScript_v2t8w")
 center_node = NodePath("../OrbitCenter")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(0, 3.0458e-05)
-rotation = -1.56616
-scale = Vector2(0.270245, 0.261339)
-texture = ExtResource("1_yclm8")
-
 [node name="OrbitComponent" type="Node" parent="Player" node_paths=PackedStringArray("center_node")]
 script = ExtResource("2_3eql5")
 center_node = NodePath("../../EnemyCenter")
@@ -158,6 +180,21 @@ takes_damage_from = "enemy_bullets"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HitBox"]
 position = Vector2(12, 2)
 shape = SubResource("CapsuleShape2D_ojofu")
+
+[node name="ShipBody" type="Node2D" parent="Player"]
+
+[node name="ShipSprite" type="Sprite2D" parent="Player/ShipBody"]
+position = Vector2(-7, 1)
+rotation = -1.56616
+scale = Vector2(0.11645, 0.139472)
+texture = ExtResource("12_nwtqc")
+
+[node name="Cannon" type="Node2D" parent="Player"]
+
+[node name="CannonSprite" type="Sprite2D" parent="Player/Cannon"]
+position = Vector2(-15, 1)
+scale = Vector2(0.0773684, 0.0698255)
+texture = ExtResource("13_3r8it")
 
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
 
